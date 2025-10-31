@@ -116,28 +116,51 @@ class IndiaBixScraper:
         questions = []
         current_page = 1
         
-        while current_page <= max_pages:
-            try:
-                # Construct page URL
-                if current_page == 1:
-                    page_url = url
-                else:
-                    # IndiaBix pagination format: /page-2/, /page-3/, etc.
-                    base_url = url.rstrip('/')
-                    page_url = f"{base_url}/{current_page}"
+        # Get all page URLs first
+        page_urls = [url]  # Start with the first page
+        
+        try:
+            # Fetch first page to find all pagination links
+            print(f"Fetching page {current_page}: {url}")
+            soup = self.fetch_page(url)
+            
+            if soup:
+                # Find all pagination links with 6-digit format (IndiaBix style)
+                all_links = soup.find_all('a', href=True)
+                base_path = urlparse(url).path.rstrip('/')
                 
-                print(f"Fetching page {current_page}: {page_url}")
-                soup = self.fetch_page(page_url)
+                for link in all_links:
+                    href = link.get('href')
+                    # Match IndiaBix pagination: /category/subcategory/006001
+                    if href and base_path in href and re.search(r'/\d{6}$', href):
+                        full_url = urljoin(url, href)
+                        if full_url not in page_urls:
+                            page_urls.append(full_url)
+                
+                # Limit to max_pages
+                page_urls = page_urls[:max_pages]
+                print(f"Found {len(page_urls)} pages to scrape")
+        
+        except Exception as e:
+            print(f"Error finding pagination: {str(e)}")
+        
+        # Now scrape all pages
+        for page_num, page_url in enumerate(page_urls, 1):
+            try:
+                if page_num > 1:
+                    print(f"Fetching page {page_num}: {page_url}")
+                    soup = self.fetch_page(page_url)
+                # else: already fetched the first page
                 
                 if not soup:
-                    break
+                    continue
                 
-                # Find all question containers - these contain the full question
+                # Find all question containers
                 question_divs = soup.find_all('div', class_='bix-div-container')
                 
                 if not question_divs:
-                    print(f"No questions found on page {current_page}")
-                    break
+                    print(f"No questions found on page {page_num}")
+                    continue
                 
                 page_questions = 0
                 for q_div in question_divs:
@@ -146,18 +169,11 @@ class IndiaBixScraper:
                         questions.append(parsed_q)
                         page_questions += 1
                 
-                print(f"Found {page_questions} questions on page {current_page}")
-                
-                # Check if there's a next page
-                next_link = soup.find('a', string=re.compile(r'next|›|»', re.I))
-                if not next_link or page_questions == 0:
-                    break
-                
-                current_page += 1
+                print(f"Found {page_questions} questions on page {page_num}")
                 
             except Exception as e:
-                print(f"Error on page {current_page}: {str(e)}")
-                break
+                print(f"Error on page {page_num}: {str(e)}")
+                continue
         
         return questions
     
@@ -190,7 +206,7 @@ def test_scraper():
     test_url = "https://www.indiabix.com/general-knowledge/basic-general-knowledge/"
     
     try:
-        result = scraper.scrape_url(test_url, max_pages=1)
+        result = scraper.scrape_url(test_url, max_pages=3)
         print(f"\nScraped {result['total']} questions from {result['category']}")
         
         if result['questions']:
