@@ -10,6 +10,55 @@ from typing import List, Dict, Optional
 from urllib.parse import urlparse, urljoin
 
 
+def format_question_text(text: str) -> str:
+    """
+    Format question text for better readability.
+    Detects and formats code blocks, adds proper line breaks.
+    """
+    if not text:
+        return ""
+    
+    # Check if the text contains code patterns
+    has_code = any([
+        '#include' in text,
+        'int main()' in text,
+        'printf(' in text,
+        'return 0' in text,
+        '{' in text and '}' in text,
+        'void ' in text,
+        'class ' in text,
+        'def ' in text,
+        'function ' in text,
+        'for(' in text or 'while(' in text,
+        'if(' in text,
+    ])
+    
+    if has_code:
+        # Format as code block
+        # Add line breaks after common code patterns
+        text = re.sub(r'(#include[^>]*>)', r'\1\n', text)
+        text = re.sub(r'(int main\(\))', r'\n\1', text)
+        text = re.sub(r'({)', r'\1\n', text)
+        text = re.sub(r'(})', r'\n\1', text)
+        text = re.sub(r'(;)(?=\s*[a-zA-Z_])', r'\1\n', text)
+        text = re.sub(r'(return \d+;)', r'\n\1', text)
+        
+        # Clean up multiple line breaks
+        text = re.sub(r'\n{3,}', '\n\n', text)
+    else:
+        # Regular question formatting
+        # Add line breaks after question marks if followed by capital letter
+        text = re.sub(r'\?([A-Z])', r'?\n\n\1', text)
+        
+        # Add line breaks after periods followed by capital letters
+        text = re.sub(r'\.([A-Z][a-z])', r'.\n\n\1', text)
+    
+    # Clean up any leading/trailing whitespace
+    text = text.strip()
+    
+    return text
+
+
 def format_explanation_text(text: str) -> str:
     """
     Format explanation text for better readability.
@@ -116,11 +165,12 @@ class IndiaBixScraper:
                 
                 # Get HTML with images preserved
                 question_html = str(question_text_elem)
-                # Also get text-only version
-                question_text = question_text_elem.get_text(strip=True)
+                # Get text-only version and format it
+                raw_question_text = question_text_elem.get_text(strip=True)
+                formatted_question_text = format_question_text(raw_question_text)
                 
                 # Store both versions
-                question_data['question'] = question_text
+                question_data['question'] = formatted_question_text
                 question_data['question_html'] = question_html
                 question_data['has_images'] = len(images) > 0
             else:

@@ -203,7 +203,30 @@ hr {
         if question_data.get('has_images') and question_data.get('question_html'):
             note['Question'] = question_data['question_html']
         else:
-            note['Question'] = question_data.get('question', '')
+            # Convert formatted text to HTML with proper line breaks
+            question_text = question_data.get('question', '')
+            # Check if it contains code patterns
+            is_code = any([
+                '#include' in question_text,
+                'int main()' in question_text,
+                'printf(' in question_text,
+                'return 0' in question_text,
+                'class ' in question_text,
+                'def ' in question_text,
+            ])
+            
+            if is_code:
+                # Wrap in <pre> tag for code formatting
+                question_html = f'<pre style="background-color: #f5f5f5; padding: 10px; border-radius: 5px; font-family: monospace; white-space: pre-wrap;">{question_text}</pre>'
+            else:
+                # Convert double line breaks to paragraph breaks
+                question_html = question_text.replace('\n\n', '</p><p>')
+                # Convert single line breaks to <br>
+                question_html = question_html.replace('\n', '<br>')
+                # Wrap in paragraph tags
+                question_html = f'<p>{question_html}</p>'
+            
+            note['Question'] = question_html
         
         note['Options'] = self.format_options(question_data.get('options', {}))
         
