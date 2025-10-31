@@ -4,6 +4,7 @@
 [![Anki](https://img.shields.io/badge/Anki-2.1.49+-blue.svg)](https://apps.ankiweb.net/)
 [![Python](https://img.shields.io/badge/Python-3.8+-green.svg)](https://www.python.org/)
 [![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension/releases)
+[![AnkiWeb](https://img.shields.io/badge/AnkiWeb-1588987238-blue.svg)](https://ankiweb.net/shared/info/1588987238)
 [![GitHub Stars](https://img.shields.io/github/stars/The-Harsh-Vardhan/AnkiBix-Extension?style=social)](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension)
 
 **Automatically scrape IndiaBix questions and convert them into Anki flashcards for spaced repetition learning!**
@@ -58,14 +59,28 @@ IndiaBix provides extensive question banks for competitive exam preparation acro
 
 ### Prerequisites
 - **Anki Desktop**: Version 2.1.49 or higher ([Download here](https://apps.ankiweb.net/))
-- **Python 3.8+**: Usually bundled with Anki
 - **Internet Connection**: Required for web scraping
 
-### Method 1: Manual Installation (Recommended for Development)
+### Method 1: From AnkiWeb (Recommended) ⭐
 
-1. **Download the add-on files**
-   ```
-   Clone or download this repository to your computer
+**The easiest way to install!**
+
+1. Open Anki Desktop
+2. Go to **Tools → Add-ons → Get Add-ons...**
+3. Enter the add-on code: **`1588987238`**
+4. Click **OK** and restart Anki
+
+That's it! Dependencies are installed automatically.
+
+🔗 **AnkiWeb Page**: [https://ankiweb.net/shared/info/1588987238](https://ankiweb.net/shared/info/1588987238)
+
+### Method 2: Manual Installation (For Development)
+
+Only use this method if you want to modify the code or contribute to development.
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/The-Harsh-Vardhan/AnkiBix-Extension.git
    ```
 
 2. **Locate your Anki add-ons folder**
@@ -73,40 +88,27 @@ IndiaBix provides extensive question banks for competitive exam preparation acro
    - Mac: `~/Library/Application Support/Anki2/addons21/`
    - Linux: `~/.local/share/Anki2/addons21/`
 
-3. **Create a new folder for the add-on**
-   ```
-   Create a folder named "indiabix_flashcard_generator" in the addons21 directory
-   ```
-
-4. **Copy all files to the folder**
-   ```
-   Copy all .py and .json files to the newly created folder
+3. **Copy the add-on files**
+   ```bash
+   # Copy all .py and .json files to a new folder in addons21
+   # Name the folder: indiabix_flashcard_generator
    ```
 
-5. **Install dependencies**
-   
-   The add-on requires `beautifulsoup4` and `requests`. Install them:
+4. **Install dependencies**
    
    **Windows:**
    ```powershell
    cd "%APPDATA%\Anki2\addons21\indiabix_flashcard_generator"
-   python -m pip install beautifulsoup4 requests
+   python -m pip install -r requirements.txt
    ```
    
    **Mac/Linux:**
    ```bash
    cd ~/.local/share/Anki2/addons21/indiabix_flashcard_generator
-   python3 -m pip install beautifulsoup4 requests
+   python3 -m pip install -r requirements.txt
    ```
 
-6. **Restart Anki**
-
-### Method 2: From AnkiWeb (When Published)
-
-1. Open Anki
-2. Go to **Tools → Add-ons → Get Add-ons**
-3. Enter the add-on code: `[CODE WILL BE PROVIDED AFTER ANKIWEB SUBMISSION]`
-4. Click **OK** and restart Anki
+5. **Restart Anki**
 
 ## 📖 Usage
 

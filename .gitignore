@@ -36,7 +36,9 @@ env/
 # Anki
 *.pyc
 meta.json
-*.ankiaddon
+
+# Allow .ankiaddon files in releases folder
+!releases/*.ankiaddon
 
 # Testing
 .pytest_cache/
