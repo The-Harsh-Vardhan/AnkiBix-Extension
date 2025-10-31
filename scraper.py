@@ -10,6 +10,50 @@ from typing import List, Dict, Optional
 from urllib.parse import urlparse, urljoin
 
 
+def format_explanation_text(text: str) -> str:
+    """
+    Format explanation text for better readability.
+    Adds line breaks after sentences and around step numbers.
+    """
+    if not text:
+        return ""
+    
+    # Add line breaks before "Step X:" patterns
+    text = re.sub(r'(Step \d+:)', r'\n\n\1 ', text)
+    
+    # Add line breaks after semicolons in steps
+    text = re.sub(r';(?=[a-z])', r';\n', text)
+    
+    # Add line breaks around "here" explanations  
+    text = re.sub(r'([;,])here ', r'\1\n\nHere ', text, flags=re.IGNORECASE)
+    
+    # Add line breaks before "Hence" for conclusions
+    text = re.sub(r'([\.;])Hence ', r'\1\n\nHence ', text, flags=re.IGNORECASE)
+    
+    # Add line breaks before "So" for conclusions
+    text = re.sub(r'([\.;])So ', r'\1\n\nSo ', text, flags=re.IGNORECASE)
+    
+    # Add line breaks before "Therefore"
+    text = re.sub(r'([\.;])Therefore ', r'\1\n\nTherefore ', text, flags=re.IGNORECASE)
+    
+    # Add line breaks after periods followed by capital letters
+    text = re.sub(r'\.([A-Z])', r'.\n\n\1', text)
+    
+    # Add line breaks before "This means", "This is", etc.
+    text = re.sub(r'\.This ', r'.\n\nThis ', text)
+    
+    # Add line breaks before "The answer", "The output", "The result"
+    text = re.sub(r'\.(The (?:answer|output|result|solution))', r'.\n\n\1', text, flags=re.IGNORECASE)
+    
+    # Remove multiple consecutive line breaks (more than 2)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    
+    # Clean up any leading/trailing whitespace
+    text = text.strip()
+    
+    return text
+
+
 class IndiaBixScraper:
     """Scraper for IndiaBix questions"""
     
@@ -128,8 +172,12 @@ class IndiaBixScraper:
                         absolute_url = urljoin('https://www.indiabix.com', src)
                         img['src'] = absolute_url
                 
-                # Store both text and HTML versions
-                question_data['explanation'] = explanation_div.get_text(strip=True)
+                # Get text and format it for better readability
+                raw_text = explanation_div.get_text(strip=True)
+                formatted_text = format_explanation_text(raw_text)
+                
+                # Store both formatted text and HTML versions
+                question_data['explanation'] = formatted_text
                 question_data['explanation_html'] = str(explanation_div) if exp_images else ""
             else:
                 question_data['explanation'] = ""

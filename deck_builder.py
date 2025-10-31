@@ -220,7 +220,13 @@ hr {
             if question_data.get('explanation_html'):
                 note['Explanation'] = question_data['explanation_html']
             else:
-                note['Explanation'] = question_data['explanation']
+                # Convert formatted text to HTML with line breaks
+                explanation_text = question_data['explanation']
+                # Replace double line breaks with paragraph breaks
+                explanation_html = explanation_text.replace('\n\n', '</p><p>')
+                # Wrap in paragraph tags
+                explanation_html = f'<p>{explanation_html}</p>'
+                note['Explanation'] = explanation_html
         else:
             note['Explanation'] = ""
         
