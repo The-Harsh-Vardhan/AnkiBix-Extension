@@ -148,15 +148,16 @@ class IndiaBixScraper:
         
         # Get all page URLs first
         page_urls = [url]  # Start with the first page
+        first_page_soup = None
         
         try:
             # Fetch first page to find all pagination links
             print(f"Fetching page {current_page}: {url}")
-            soup = self.fetch_page(url)
+            first_page_soup = self.fetch_page(url)
             
-            if soup:
+            if first_page_soup:
                 # Find all pagination links with 6-digit format (IndiaBix style)
-                all_links = soup.find_all('a', href=True)
+                all_links = first_page_soup.find_all('a', href=True)
                 base_path = urlparse(url).path.rstrip('/')
                 
                 for link in all_links:
@@ -173,14 +174,18 @@ class IndiaBixScraper:
         
         except Exception as e:
             print(f"Error finding pagination: {str(e)}")
+            # If we can't fetch the first page, return empty
+            return questions
         
         # Now scrape all pages
         for page_num, page_url in enumerate(page_urls, 1):
             try:
-                if page_num > 1:
+                # Use cached first page soup if available
+                if page_num == 1 and first_page_soup:
+                    soup = first_page_soup
+                else:
                     print(f"Fetching page {page_num}: {page_url}")
                     soup = self.fetch_page(page_url)
-                # else: already fetched the first page
                 
                 if not soup:
                     continue
