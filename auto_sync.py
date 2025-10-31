@@ -56,6 +56,33 @@ class CurrentAffairsAutoSync:
         date_str = date.strftime("%Y-%m-%d")
         return f"https://www.indiabix.com/current-affairs/{date_str}/"
     
+    def get_week_number(self, date: datetime) -> int:
+        """Get the week number within the month (1-5)"""
+        # Get the day of the month
+        day = date.day
+        # Calculate week number (1-based)
+        week_num = ((day - 1) // 7) + 1
+        return week_num
+    
+    def get_hierarchical_deck_name(self, date: datetime) -> str:
+        """
+        Generate hierarchical deck name: 
+        IndiaBix::CurrentAffairs::YYYY::Month::WeekN
+        
+        Example: IndiaBix::CurrentAffairs::2025::October::Week1
+        """
+        base_deck = self.config.get('current_affairs_deck', 'IndiaBix::CurrentAffairs')
+        
+        # Get year, month name, and week number
+        year = date.strftime("%Y")
+        month = date.strftime("%B")  # Full month name (e.g., "October")
+        week_num = self.get_week_number(date)
+        
+        # Build hierarchical deck name
+        deck_name = f"{base_deck}::{year}::{month}::Week{week_num}"
+        
+        return deck_name
+    
     def try_sync_date(self, date: datetime) -> Optional[Dict]:
         """Try to sync current affairs for a specific date"""
         date_str = date.strftime("%Y-%m-%d")
@@ -114,7 +141,10 @@ class CurrentAffairsAutoSync:
         
         # Import to Anki
         try:
-            deck_name = self.config.get('current_affairs_deck', 'IndiaBix::CurrentAffairs')
+            # Parse the date to create hierarchical deck name
+            date_obj = datetime.strptime(result['date'], "%Y-%m-%d")
+            deck_name = self.get_hierarchical_deck_name(date_obj)
+            
             builder = DeckBuilder(mw.col)
             
             # Add date tag
@@ -162,7 +192,8 @@ class CurrentAffairsAutoSync:
                 result = self.try_sync_date(current_date)
                 if result:
                     try:
-                        deck_name = self.config.get('current_affairs_deck', 'IndiaBix::CurrentAffairs')
+                        # Use hierarchical deck name
+                        deck_name = self.get_hierarchical_deck_name(current_date)
                         builder = DeckBuilder(mw.col)
                         date_tag = f"current-affairs-{result['date']}"
                         tags = ['IndiaBix', 'CurrentAffairs', date_tag]
