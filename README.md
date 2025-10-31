@@ -32,6 +32,8 @@ IndiaBix provides extensive question banks for competitive exam preparation acro
 
 ### Core Features
 - **One-Click Import**: Simply paste an IndiaBix section URL and import all questions
+- **Daily Current Affairs Auto-Sync**: Automatically imports latest current affairs on Anki startup
+- **Hierarchical Deck Organization**: Auto-creates Year → Month → Week subdecks for better organization
 - **MCQ Format**: Questions and options on the front, answer and explanation on the back
 - **Automatic Tagging**: Cards are automatically tagged with category and subcategory
 - **Deck Management**: Choose existing decks or create new ones on the fly

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - ⭐ **Daily Current Affairs Auto-Sync** - Automatically imports daily current affairs on Anki startup
+- ⭐ **Hierarchical Deck Organization** - Automatic subdeck creation: Year → Month → Week
 - Smart date detection (tries today, falls back to yesterday)
 - Sync history tracking to prevent duplicates
 - "Sync Daily Current Affairs" menu item for manual sync

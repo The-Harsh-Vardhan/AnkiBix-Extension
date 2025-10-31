@@ -25,9 +25,15 @@ The **Daily Current Affairs Auto-Sync** feature automatically imports daily curr
 - Date range selector for flexibility
 - Progress tracking with detailed logs
 
-### 4. **Fully Configurable**
+### 4. **Hierarchical Deck Organization** ⭐
+- Automatic subdeck creation by Year → Month → Week
+- Example: `IndiaBix::CurrentAffairs::2025::October::Week5`
+- ~70 questions per week (manageable chunks)
+- Easy to browse and study specific time periods
+
+### 5. **Fully Configurable**
 - Enable/disable auto-sync via config or UI
-- Customize target deck name
+- Customize base deck name
 - All settings in `config.json`
 
 ---
@@ -132,7 +138,36 @@ Day 3: Open Anki → Nov 1 questions imported
 
 ---
 
-## 🎨 Card Format
+## 🎨 Card Format & Organization
+
+### Hierarchical Deck Structure
+
+Questions are automatically organized into nested subdecks:
+
+```
+IndiaBix
+└── CurrentAffairs
+    └── 2025
+        ├── October
+        │   ├── Week1 (Oct 1-7: ~70 questions)
+        │   ├── Week2 (Oct 8-14: ~70 questions)
+        │   ├── Week3 (Oct 15-21: ~70 questions)
+        │   ├── Week4 (Oct 22-28: ~70 questions)
+        │   └── Week5 (Oct 29-31: ~30 questions)
+        ├── November
+        │   ├── Week1
+        │   ├── Week2
+        │   └── ...
+        └── December
+            └── ...
+```
+
+**Benefits:**
+- ✅ Manageable chunks (~70 questions/week)
+- ✅ Easy browsing by time period
+- ✅ Study specific weeks or months
+- ✅ Clear organization - no overwhelming single deck
+- ✅ Automatic creation - no manual work!
 
 ### Tags Applied
 Each imported question gets these tags:
