@@ -62,6 +62,9 @@ START_HERE.md
 NEXT_STEPS_GUIDE.md
 PRE_PUBLICATION_CHECKLIST.md
 SECURITY_AUDIT.md
+
+# Extras folder (old files, debug scripts, etc.)
+Extras/
 temp/
 
 # OS

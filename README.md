@@ -8,6 +8,9 @@
 
 **Automatically scrape IndiaBix questions and convert them into Anki flashcards for spaced repetition learning!**
 
+![Import Interface](./Images/Import_Screen.png)
+*Simple one-click import interface*
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -132,6 +135,18 @@ IndiaBix provides extensive question banks for competitive exam preparation acro
    - Cards will be added to your selected deck
    - Sync with AnkiWeb to access on mobile devices
 
+### Current Affairs Auto-Sync
+
+Automatically import daily current affairs questions:
+
+![Current Affairs Management](./Images/Manage_Current_Affairs_Screen.png)
+*Manage daily Current Affairs auto-sync settings*
+
+1. **Enable Auto-Sync**: Tools → IndiaBix → Manage Current Affairs Auto-Sync
+2. **Toggle Settings**: Enable/disable automatic daily imports
+3. **Catch-up Mode**: Import missed days (up to 90 days back)
+4. **Hierarchical Organization**: Questions automatically organized by Year → Month → Week
+
 ### Example URLs
 
 Here are some popular IndiaBix sections you can import:
@@ -150,6 +165,13 @@ Here are some popular IndiaBix sections you can import:
 - `https://www.indiabix.com/aptitude/numbers/`
 - `https://www.indiabix.com/aptitude/percentage/`
 - `https://www.indiabix.com/aptitude/time-and-work/`
+
+### Sample Flashcard
+
+See how questions are beautifully formatted:
+
+![Question and Answer](./Images/Question_and_Answer.png)
+*Professionally formatted flashcards with clear explanations*
 
 ### Tips for Best Results
 
