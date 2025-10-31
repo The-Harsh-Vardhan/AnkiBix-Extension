@@ -84,27 +84,14 @@ class DeckBuilder:
     font-family: Arial, sans-serif;
     font-size: 16px;
     text-align: left;
-    color: #000000 !important;
+    color: #000; /* Changed from #333 to pure black */
     background-color: #fff;
     padding: 20px;
 }
 
-/* Force black text for all elements */
-.card, .card * {
-    color: #000000 !important;
-}
-
-/* Exception for specific colored headings */
-.question h3 {
-    color: #000000 !important;
-}
-
-.answer h3 {
-    color: #000000 !important;
-}
-
-.explanation h4 {
-    color: #000000 !important;
+/* Ensure all nested text is black */
+.card * {
+    color: #000 !important;
 }
 
 .question {
@@ -113,7 +100,11 @@ class DeckBuilder:
     background-color: #f0f8ff;
     border-left: 4px solid #2196F3;
     border-radius: 4px;
-    color: #000000 !important;
+}
+
+.question h3 {
+    margin-top: 0;
+    color: #000; /* Make heading black */
 }
 
 .options {
@@ -121,12 +112,11 @@ class DeckBuilder:
     padding: 15px;
     background-color: #f9f9f9;
     border-radius: 4px;
-    color: #000000 !important;
 }
 
 .options h4 {
     margin-top: 0;
-    color: #000000 !important;
+    color: #000; /* Make heading black */
 }
 
 .answer {
@@ -135,11 +125,6 @@ class DeckBuilder:
     border-left: 4px solid #4CAF50;
     border-radius: 4px;
     margin-bottom: 20px;
-    color: #000000 !important;
-}
-
-.answer strong {
-    color: #000000 !important;
 }
 
 .explanation {
@@ -148,16 +133,16 @@ class DeckBuilder:
     border-left: 4px solid #FF9800;
     border-radius: 4px;
     margin-top: 20px;
-    color: #000000 !important;
+}
+
+.explanation h4 {
+    margin-top: 0;
+    color: #000; /* Make heading black */
 }
 
 strong {
     font-size: 18px;
-    color: #000000 !important;
-}
-
-p, div, span, li, ul, ol {
-    color: #000000 !important;
+    color: #000; /* Ensure bold text is black */
 }
 
 hr {
