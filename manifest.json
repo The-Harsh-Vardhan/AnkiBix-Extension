@@ -1,12 +1,12 @@
 {
   "package": "indiabix_flashcard_generator",
   "name": "IndiaBix Flashcard Generator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "The-Harsh-Vardhan",
   "homepage": "https://github.com/The-Harsh-Vardhan/AnkiBix-Extension",
   "conflicts": [],
   "min_point_version": 49,
   "max_point_version": 0,
-  "description": "Automatically scrape IndiaBix questions and convert them into Anki flashcards. Supports General Knowledge, Aptitude, Reasoning, and more.",
+  "description": "Automatically scrape IndiaBix questions and convert them into Anki flashcards. Supports General Knowledge, Aptitude, Reasoning, and daily Current Affairs auto-sync.",
   "ankiweb_id": ""
 }

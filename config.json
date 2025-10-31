@@ -6,5 +6,7 @@
   "include_explanation": true,
   "batch_size": 50,
   "timeout": 30,
-  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+  "auto_sync_current_affairs": true,
+  "current_affairs_deck": "IndiaBix::CurrentAffairs"
 }
