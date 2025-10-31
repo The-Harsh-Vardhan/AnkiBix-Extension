@@ -152,14 +152,22 @@ class IndiaBixDialog(QDialog):
     def populate_decks(self):
         """Populate the deck combo box with existing decks"""
         self.deck_combo.clear()
-        deck_names = sorted([d.name for d in mw.col.decks.all()])
+        # Handle both old and new Anki API versions
+        all_decks = mw.col.decks.all()
+        if all_decks and isinstance(all_decks[0], dict):
+            # New API: returns list of dictionaries
+            deck_names = sorted([d['name'] for d in all_decks])
+        else:
+            # Old API: returns objects with .name attribute
+            deck_names = sorted([d.name for d in all_decks])
+        
         self.deck_combo.addItems(deck_names)
         
         # Try to select default deck
         try:
             default_index = deck_names.index(self.default_deck)
             self.deck_combo.setCurrentIndex(default_index)
-        except ValueError:
+        except (ValueError, AttributeError):
             pass
     
     def create_new_deck(self):
