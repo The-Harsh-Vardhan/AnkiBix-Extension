@@ -5,6 +5,36 @@ All notable changes to the IndiaBix Flashcard Generator will be documented in th
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-10-31
+
+### Added
+- ⭐ **Daily Current Affairs Auto-Sync** - Automatically imports daily current affairs on Anki startup
+- Smart date detection (tries today, falls back to yesterday)
+- Sync history tracking to prevent duplicates
+- "Sync Daily Current Affairs" menu item for manual sync
+- "Manage Current Affairs" dialog with comprehensive management features
+- Catch-up feature to sync multiple missed days at once
+- Date range selector for bulk syncing (up to 90 days)
+- Activity log showing sync operations
+- Progress tracking for batch syncs
+- Enable/disable auto-sync via config or UI
+- Configurable target deck for current affairs
+- Date-specific tagging (e.g., `current-affairs-2025-10-31`)
+- Notification system for successful syncs
+- Comprehensive documentation (`CURRENT_AFFAIRS_FEATURE.md`)
+
+### Changed
+- Updated version to 1.1.0
+- Enhanced manifest description to mention auto-sync
+- Added new config options: `auto_sync_current_affairs`, `current_affairs_deck`
+- Auto-sync runs 3 seconds after Anki startup (non-intrusive)
+
+### Technical
+- New module: `auto_sync.py` - Core auto-sync logic
+- New module: `current_affairs_ui.py` - Management dialog
+- Sync history stored in `sync_history.json`
+- QTimer integration for delayed startup sync
+
 ## [1.0.0] - 2025-10-31
 
 ### Added
