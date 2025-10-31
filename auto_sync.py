@@ -73,7 +73,7 @@ class CurrentAffairsAutoSync:
             scraper = IndiaBixScraper(timeout=self.config.get('timeout', 30))
             result = scraper.scrape_url(url, max_pages=1)
             
-            if result['success'] and result['questions']:
+            if result and result.get('questions'):
                 return {
                     'date': date_str,
                     'questions': result['questions'],
