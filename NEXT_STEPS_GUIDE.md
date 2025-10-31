@@ -81,7 +81,7 @@ Even if scraping doesn't work yet, you can test the Anki integration:
 
 ```powershell
 # 1. Copy to Anki
-$source = "C:\Users\harsh\OneDrive - Indian Institute of Information Technology, Nagpur\IIIT Nagpur\Summers 2025\Projects\AnkiBix Extension"
+$source = "PATH_TO_YOUR_PROJECT_FOLDER"
 $dest = "$env:APPDATA\Anki2\addons21\indiabix_flashcard_generator"
 
 New-Item -ItemType Directory -Force -Path $dest
@@ -245,7 +245,7 @@ Test-Path "$env:APPDATA\Anki2\addons21"
 Test-Path "C:\Program Files\Anki\python.exe"
 
 # 4. Copy the add-on (run all together)
-$source = "C:\Users\harsh\OneDrive - Indian Institute of Information Technology, Nagpur\IIIT Nagpur\Summers 2025\Projects\AnkiBix Extension"
+$source = "PATH_TO_YOUR_PROJECT_FOLDER"
 $dest = "$env:APPDATA\Anki2\addons21\indiabix_flashcard_generator"
 New-Item -ItemType Directory -Force -Path $dest
 Copy-Item "$source\*.py" $dest

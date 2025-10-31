@@ -44,7 +44,7 @@ This will open your Anki add-ons folder in File Explorer.
 
 **Note the path** - it's usually:
 ```
-C:\Users\harsh\AppData\Roaming\Anki2\addons21\
+C:\Users\<YourUsername>\AppData\Roaming\Anki2\addons21\
 ```
 
 ---
@@ -57,7 +57,7 @@ Now we'll install your add-on into Anki.
 
 ```powershell
 # Copy the entire project folder to Anki's addons21 folder
-$source = "C:\Users\harsh\OneDrive - Indian Institute of Information Technology, Nagpur\IIIT Nagpur\Summers 2025\Projects\AnkiBix Extension"
+$source = "PATH_TO_YOUR_PROJECT_FOLDER"
 $destination = "$env:APPDATA\Anki2\addons21\indiabix_flashcard_generator"
 
 # Create the destination folder
