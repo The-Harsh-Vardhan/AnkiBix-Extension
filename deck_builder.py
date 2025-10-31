@@ -89,6 +89,24 @@ class DeckBuilder:
     padding: 20px;
 }
 
+/* Force black text for all elements */
+.card, .card * {
+    color: #000000 !important;
+}
+
+/* Exception for specific colored headings */
+.question h3 {
+    color: #000000 !important;
+}
+
+.answer h3 {
+    color: #000000 !important;
+}
+
+.explanation h4 {
+    color: #000000 !important;
+}
+
 .question {
     margin-bottom: 20px;
     padding: 15px;
@@ -96,11 +114,6 @@ class DeckBuilder:
     border-left: 4px solid #2196F3;
     border-radius: 4px;
     color: #000000 !important;
-}
-
-.question h3 {
-    margin-top: 0;
-    color: #2196F3 !important;
 }
 
 .options {
@@ -125,10 +138,6 @@ class DeckBuilder:
     color: #000000 !important;
 }
 
-.answer h3 {
-    color: green !important;
-}
-
 .answer strong {
     color: #000000 !important;
 }
@@ -142,13 +151,12 @@ class DeckBuilder:
     color: #000000 !important;
 }
 
-.explanation h4 {
-    margin-top: 0;
-    color: #FF9800 !important;
-}
-
 strong {
     font-size: 18px;
+    color: #000000 !important;
+}
+
+p, div, span, li, ul, ol {
     color: #000000 !important;
 }
 
