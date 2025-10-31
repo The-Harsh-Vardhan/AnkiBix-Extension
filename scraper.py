@@ -60,7 +60,25 @@ class IndiaBixScraper:
                 # Remove script and style elements
                 for script in question_text_elem(['script', 'style']):
                     script.decompose()
-                question_data['question'] = question_text_elem.get_text(strip=True)
+                
+                # Find and convert images to absolute URLs
+                images = question_text_elem.find_all('img')
+                for img in images:
+                    src = img.get('src', '')
+                    if src:
+                        # Convert relative URLs to absolute
+                        absolute_url = urljoin('https://www.indiabix.com', src)
+                        img['src'] = absolute_url
+                
+                # Get HTML with images preserved
+                question_html = str(question_text_elem)
+                # Also get text-only version
+                question_text = question_text_elem.get_text(strip=True)
+                
+                # Store both versions
+                question_data['question'] = question_text
+                question_data['question_html'] = question_html
+                question_data['has_images'] = len(images) > 0
             else:
                 return None
             
@@ -85,8 +103,8 @@ class IndiaBixScraper:
             
             if answer_div:
                 answer_text = answer_div.get_text(strip=True)
-                # Extract just the option letter (A, B, C, D)
-                answer_match = re.search(r'([A-D])', answer_text)
+                # Extract just the option letter (A, B, C, D, E) - supports up to 5 options
+                answer_match = re.search(r'([A-E])', answer_text)
                 if answer_match:
                     question_data['answer'] = answer_match.group(1)
                 else:
@@ -101,9 +119,21 @@ class IndiaBixScraper:
                 # Remove script and style elements
                 for script in explanation_div(['script', 'style']):
                     script.decompose()
+                
+                # Find and convert images to absolute URLs
+                exp_images = explanation_div.find_all('img')
+                for img in exp_images:
+                    src = img.get('src', '')
+                    if src:
+                        absolute_url = urljoin('https://www.indiabix.com', src)
+                        img['src'] = absolute_url
+                
+                # Store both text and HTML versions
                 question_data['explanation'] = explanation_div.get_text(strip=True)
+                question_data['explanation_html'] = str(explanation_div) if exp_images else ""
             else:
                 question_data['explanation'] = ""
+                question_data['explanation_html'] = ""
             
             return question_data if question_data.get('question') else None
             

@@ -214,8 +214,12 @@ hr {
         # Set deck
         note.note_type()['did'] = deck_id
         
-        # Fill in fields
-        note['Question'] = question_data.get('question', '')
+        # Fill in fields - use HTML version if images present
+        if question_data.get('has_images') and question_data.get('question_html'):
+            note['Question'] = question_data['question_html']
+        else:
+            note['Question'] = question_data.get('question', '')
+        
         note['Options'] = self.format_options(question_data.get('options', {}))
         
         # Format answer
@@ -226,9 +230,12 @@ hr {
             answer_text = answer
         note['Answer'] = answer_text
         
-        # Add explanation if requested
+        # Add explanation if requested - use HTML version if images present
         if include_explanation and question_data.get('explanation'):
-            note['Explanation'] = question_data['explanation']
+            if question_data.get('explanation_html'):
+                note['Explanation'] = question_data['explanation_html']
+            else:
+                note['Explanation'] = question_data['explanation']
         else:
             note['Explanation'] = ""
         
