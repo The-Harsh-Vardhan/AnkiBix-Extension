@@ -84,7 +84,7 @@ class DeckBuilder:
     font-family: Arial, sans-serif;
     font-size: 16px;
     text-align: left;
-    color: #333;
+    color: #000000 !important;
     background-color: #fff;
     padding: 20px;
 }
@@ -95,11 +95,12 @@ class DeckBuilder:
     background-color: #f0f8ff;
     border-left: 4px solid #2196F3;
     border-radius: 4px;
+    color: #000000 !important;
 }
 
 .question h3 {
     margin-top: 0;
-    color: #2196F3;
+    color: #2196F3 !important;
 }
 
 .options {
@@ -107,11 +108,12 @@ class DeckBuilder:
     padding: 15px;
     background-color: #f9f9f9;
     border-radius: 4px;
+    color: #000000 !important;
 }
 
 .options h4 {
     margin-top: 0;
-    color: #666;
+    color: #000000 !important;
 }
 
 .answer {
@@ -120,6 +122,15 @@ class DeckBuilder:
     border-left: 4px solid #4CAF50;
     border-radius: 4px;
     margin-bottom: 20px;
+    color: #000000 !important;
+}
+
+.answer h3 {
+    color: green !important;
+}
+
+.answer strong {
+    color: #000000 !important;
 }
 
 .explanation {
@@ -128,15 +139,17 @@ class DeckBuilder:
     border-left: 4px solid #FF9800;
     border-radius: 4px;
     margin-top: 20px;
+    color: #000000 !important;
 }
 
 .explanation h4 {
     margin-top: 0;
-    color: #FF9800;
+    color: #FF9800 !important;
 }
 
 strong {
     font-size: 18px;
+    color: #000000 !important;
 }
 
 hr {
