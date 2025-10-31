@@ -1,0 +1,85 @@
+📑 Project Proposal: Anki Extension for Automated IndiaBix Flashcard Generation
+1. Project Overview
+IndiaBix provides a huge repository of logical reasoning, aptitude, and general knowledge questions, widely used by students preparing for competitive exams. However, manual conversion of these questions into flashcards for long-term retention is time-consuming.
+ This project proposes an Anki extension that allows users to directly import Q–A pairs from IndiaBix into their Anki decks by simply pasting the URL of a section.
+
+2. Problem Statement
+Current preparation methods involve repetitive browsing of IndiaBix and manual note-taking, which is inefficient for spaced repetition. There is no direct integration between IndiaBix’s structured content and modern learning tools like Anki.
+
+3. Objectives
+Develop an Anki add-on (extension) to scrape questions directly from IndiaBix section links.
+
+
+Parse content into MCQ-style flashcards (Question + Options on front, Answer + Explanation on back).
+
+
+Automatically tag flashcards with relevant topics (Reasoning, GK, etc.).
+
+
+Allow users to choose categories and deck names before importing.
+
+
+Ensure seamless integration with Anki desktop and sync with AnkiMobile/AnkiWeb.
+
+
+
+4. Key Concepts
+Anki Add-on Development (Python, PyQt).
+
+
+Web Scraping & Parsing (BeautifulSoup, Requests).
+
+
+Deck Generation (Anki’s API, AnkiConnect, or add-on hooks).
+
+
+Spaced Repetition for learning efficiency.
+
+
+
+5. System Design / Workflow
+User Input → Paste an IndiaBix section link (e.g., Basic GK, Blood Relations, etc.) in the extension.
+
+
+Scraper Engine → Fetch questions, options, answers, explanations.
+
+
+Data Formatter → Convert into MCQ card structure.
+
+
+Front: Question + Options
+
+
+Back: Correct Answer + Explanation
+
+
+Deck Builder → Automatically create/import deck in Anki.
+
+
+Flashcard Sync → Cards are available across Anki desktop & mobile.
+
+
+
+6. Expected Outcomes
+Anki users get instant flashcards from IndiaBix without external tools.
+
+
+Faster revision cycle for aptitude & GK preparation.
+
+
+A reusable, open-source extension that can be extended to other Q–A sites.
+
+
+
+7. Future Scope
+Extend support to other learning platforms (GeeksforGeeks, LeetCode, etc.).
+
+
+Add daily deck updates (scrape “Question of the Day” automatically).
+
+
+Provide quiz/game mode inside Anki for better engagement.
+
+
+Integrate AI explanations where IndiaBix lacks clarity.
+

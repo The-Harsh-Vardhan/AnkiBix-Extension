@@ -1,0 +1,10 @@
+{
+  "default_deck": "IndiaBix::General",
+  "auto_tag": true,
+  "default_tags": ["IndiaBix"],
+  "card_type": "Basic",
+  "include_explanation": true,
+  "batch_size": 50,
+  "timeout": 30,
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+}
