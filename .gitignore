@@ -42,13 +42,26 @@ meta.json
 .pytest_cache/
 .coverage
 htmlcov/
+debug_*.py
+debug_*.html
+*_page.html
 
 # Logs
 *.log
 
 # Temporary files
 *.tmp
-*.bak
+*.html
+
+# Documentation clutter (keep only essential docs)
+MISSION_COMPLETE.md
+RELEASE_READY.md
+INSTALLATION_COMPLETE.md
+PROJECT_SUMMARY.md
+START_HERE.md
+NEXT_STEPS_GUIDE.md
+PRE_PUBLICATION_CHECKLIST.md
+SECURITY_AUDIT.md
 temp/
 
 # OS

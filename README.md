@@ -3,6 +3,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Anki](https://img.shields.io/badge/Anki-2.1.49+-blue.svg)](https://apps.ankiweb.net/)
 [![Python](https://img.shields.io/badge/Python-3.8+-green.svg)](https://www.python.org/)
+[![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/The-Harsh-Vardhan/AnkiBix-Extension?style=social)](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension)
 
 **Automatically scrape IndiaBix questions and convert them into Anki flashcards for spaced repetition learning!**
 
@@ -348,11 +350,21 @@ SOFTWARE.
 - **Anki**: For the powerful spaced repetition system
 - **Contributors**: Everyone who helps improve this add-on
 
+## � Documentation
+
+For detailed documentation, see the [docs](./docs) folder:
+- [Installation Guide](./docs/INSTALL.md)
+- [Quick Start](./docs/QUICKSTART.md)
+- [Architecture](./docs/ARCHITECTURE.md)
+- [Current Affairs Auto-Sync](./docs/CURRENT_AFFAIRS_FEATURE.md)
+- [Deployment Guide](./docs/DEPLOYMENT.md)
+- [GitHub Release Instructions](./docs/GITHUB_RELEASE_INSTRUCTIONS.md)
+- [AnkiWeb Submission Guide](./docs/ANKIWEB_SUBMISSION_GUIDE.md)
+
 ## 📞 Contact
 
-- **GitHub**: [github.com/yourusername/indiabix-anki](https://github.com/yourusername/indiabix-anki)
-- **Email**: your.email@example.com
-- **Issues**: [Report bugs or request features](https://github.com/yourusername/indiabix-anki/issues)
+- **GitHub**: [The-Harsh-Vardhan/AnkiBix-Extension](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension)
+- **Issues**: [Report bugs or request features](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension/issues)
 
 ---
 
