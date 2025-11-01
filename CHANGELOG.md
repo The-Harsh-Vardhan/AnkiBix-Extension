@@ -5,6 +5,13 @@ All notable changes to the IndiaBix Flashcard Generator will be documented in th
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-11-01
+
+### Fixed
+- 🐛 **Critical Bug Fix**: Answer parsing now correctly extracts the actual answer letter instead of always showing "A"
+- Updated answer extraction logic to read from HTML class name (`option-svg-letter-X`)
+- Added fallback methods for backward compatibility with old HTML structure
+
 ## [1.1.0] - 2025-10-31
 
 ### Added
