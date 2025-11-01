@@ -192,17 +192,32 @@ class IndiaBixScraper:
             
             # Extract answer
             answer_div = question_div.find('div', class_='bix-ans-option')
-            if not answer_div:
-                answer_div = question_div.find('span', class_='jq-hdnakqb')
-            
             if answer_div:
-                answer_text = answer_div.get_text(strip=True)
-                # Extract just the option letter (A, B, C, D, E) - supports up to 5 options
-                answer_match = re.search(r'([A-E])', answer_text)
-                if answer_match:
-                    question_data['answer'] = answer_match.group(1)
+                # Look for span with class containing 'option-svg-letter-'
+                # The answer letter is encoded in the class name (e.g., 'option-svg-letter-c')
+                answer_span = answer_div.find('span', class_=re.compile(r'option-svg-letter-'))
+                if answer_span:
+                    span_classes = answer_span.get('class', [])
+                    for cls in span_classes:
+                        if 'option-svg-letter-' in cls:
+                            # Extract the letter from the class name and convert to uppercase
+                            answer_letter = cls.split('-')[-1].upper()
+                            question_data['answer'] = answer_letter
+                            break
                 else:
-                    question_data['answer'] = answer_text
+                    # Fallback: try to extract from text (old method)
+                    answer_text = answer_div.get_text(strip=True)
+                    answer_match = re.search(r'([A-E])', answer_text)
+                    if answer_match:
+                        question_data['answer'] = answer_match.group(1)
+            else:
+                # Backup: check for old class name
+                answer_span = question_div.find('span', class_='jq-hdnakqb')
+                if answer_span:
+                    answer_text = answer_span.get_text(strip=True)
+                    answer_match = re.search(r'([A-E])', answer_text)
+                    if answer_match:
+                        question_data['answer'] = answer_match.group(1)
             
             # Extract explanation
             explanation_div = question_div.find('div', class_='bix-ans-description')
