@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Anki](https://img.shields.io/badge/Anki-2.1.49+-blue.svg)](https://apps.ankiweb.net/)
 [![Python](https://img.shields.io/badge/Python-3.8+-green.svg)](https://www.python.org/)
-[![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension/releases)
+[![Version](https://img.shields.io/badge/version-1.1.1-brightgreen.svg)](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension/releases)
 [![AnkiWeb](https://img.shields.io/badge/AnkiWeb-1588987238-blue.svg)](https://ankiweb.net/shared/info/1588987238)
 [![GitHub Stars](https://img.shields.io/github/stars/The-Harsh-Vardhan/AnkiBix-Extension?style=social)](https://github.com/The-Harsh-Vardhan/AnkiBix-Extension)
 
@@ -15,6 +15,7 @@
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Architecture](#architecture)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -33,6 +34,24 @@ IndiaBix provides extensive question banks for competitive exam preparation acro
 - Converting them into well-formatted Anki flashcards
 - Organizing cards with automatic tagging and deck management
 - Syncing seamlessly with AnkiWeb for mobile access
+
+## 🧩 Architecture
+
+```mermaid
+flowchart LR
+    A["Anki startup<br/>gui_hooks.main_window_did_init"] -->|"adds Tools menu items"| M["__init__.py"]
+    M -->|"Import from IndiaBix"| U["ui.py<br/>IndiaBixDialog"]
+    M -->|"Manage Current Affairs"| CU["current_affairs_ui.py"]
+    M -->|"3 s after load"| S["auto_sync.py<br/>CurrentAffairsAutoSync"]
+    CU --> S
+    U -->|"section URL"| SC["scraper.py<br/>IndiaBixScraper"]
+    S -->|"daily URL, catch-up dates"| SC
+    SC -->|"question dicts"| D["deck_builder.py<br/>DeckBuilder"]
+    D -->|"notes in Year/Month/Week decks"| C[("Anki collection")]
+    C -.->|"optional sync"| W["AnkiWeb"]
+```
+
+Full walkthrough: [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md). Docs site: https://the-harsh-vardhan.github.io/AnkiBix-Extension/
 
 ## ✨ Features
 
@@ -217,11 +236,17 @@ Edit `config.json` to customize default settings:
 indiabix_flashcard_generator/
 ├── __init__.py           # Main entry point and menu integration
 ├── manifest.json         # Add-on metadata and configuration
-├── config.json          # User-configurable settings
-├── scraper.py           # Web scraping logic for IndiaBix
-├── ui.py                # PyQt GUI dialog
-├── deck_builder.py      # Anki API integration
-└── README.md            # Documentation (this file)
+├── config.json           # User-configurable settings
+├── scraper.py            # Web scraping logic for IndiaBix
+├── ui.py                 # PyQt GUI dialog
+├── deck_builder.py       # Anki API integration
+├── auto_sync.py          # Daily Current Affairs auto-sync and catch-up
+├── current_affairs_ui.py # Auto-sync management dialog
+├── tests/                # Unit tests (formatting, images, decks, auto-sync, edge cases)
+├── docs/                 # Guides and architecture notes
+├── Images/               # README screenshots
+├── releases/             # Packaged .ankiaddon builds
+└── README.md             # Documentation (this file)
 ```
 
 ### Module Descriptions
@@ -230,6 +255,8 @@ indiabix_flashcard_generator/
 - **`scraper.py`**: Contains `IndiaBixScraper` class for web scraping
 - **`ui.py`**: Contains `IndiaBixDialog` class for the GUI
 - **`deck_builder.py`**: Contains `DeckBuilder` class for card creation
+- **`auto_sync.py`**: Contains `CurrentAffairsAutoSync` for daily imports and catch-up
+- **`current_affairs_ui.py`**: Dialog for managing auto-sync settings
 - **`config.json`**: Stores user preferences
 - **`manifest.json`**: Anki add-on metadata
 
@@ -239,8 +266,8 @@ indiabix_flashcard_generator/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/indiabix-anki.git
-   cd indiabix-anki
+   git clone https://github.com/The-Harsh-Vardhan/AnkiBix-Extension.git
+   cd AnkiBix-Extension
    ```
 
 2. **Install dependencies**
@@ -271,11 +298,7 @@ This will test scraping a sample URL and print results.
 
 ### Architecture Overview
 
-```
-User Input (URL) → Scraper → Question Parser → Deck Builder → Anki Collection
-                                                           ↓
-                                                      AnkiWeb Sync
-```
+See the [Architecture](#architecture) diagram above.
 
 ## 🐛 Troubleshooting
 
