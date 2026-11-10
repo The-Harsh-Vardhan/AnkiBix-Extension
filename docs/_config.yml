@@ -1,0 +1,3 @@
+theme: jekyll-theme-cayman
+title: IndiaBix Flashcard Generator
+description: Anki add-on that scrapes IndiaBix questions into spaced-repetition flashcards, with daily Current Affairs auto-sync
